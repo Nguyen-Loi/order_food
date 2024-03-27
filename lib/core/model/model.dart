@@ -6,7 +6,7 @@ class Model {
   final Map<String, dynamic> data;
   String get id => Methods.getString(data, 'id');
   String get createDate =>
-      Methods.convertTime(Methods.getDateTime(data, FieldName.createDate),
+      Methods.convertTime(Methods.getDateTime(data, FieldName.createDate)??DateTime.now(),
           defaultFormat: 'dd/MM/yyyy');
   ///Id danh mục
   String get refID => Methods.getString(data, FieldName.refID);

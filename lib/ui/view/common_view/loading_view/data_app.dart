@@ -35,7 +35,7 @@ class DataApp {
   void reloadUserData() async {
     if (loadDataUser() == null) {
       logSuccess('Tải dữ liệu người admin');
-      _user = userDefault;
+      // _user = userDefault;
     } else {
       await loadDataUser()!.then((value) {
         _user = UserApp(
@@ -90,11 +90,7 @@ class DataApp {
     return api.getDataCollection();
   }
 
-  UserApp get userDefault {
-    return UserApp({'email': 'admin@gmail.com', 'password': 'admin'});
-  }
-
-  void initData() async {
+  void initData(bool isAdmin) async {
     reloadUserData();
 
     await Future.delayed(const Duration(seconds: 1));
@@ -115,11 +111,11 @@ class DataApp {
     await Future.delayed(const Duration(seconds: 1));
 
     await reloadSanPham();
-    completeLoad();
+    completeLoad(isAdmin);
   }
 
-  void completeLoad() {
-    String routerPath = user.email == userDefault.email
+  void completeLoad(bool isAdmin) {
+    String routerPath = isAdmin
         ? RoutePaths.aHomeView
         : RoutePaths.uHomeView;
     try {

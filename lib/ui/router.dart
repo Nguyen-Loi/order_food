@@ -67,7 +67,8 @@ class MainRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.loadingView:
-        return MaterialPageRoute(builder: (_) => const LoadingView());
+        bool isAdmin = settings.arguments as bool;
+        return MaterialPageRoute(builder: (_) => LoadingView(isAdmin: isAdmin));
 
       case RoutePaths.loginView:
         return MaterialPageRoute(builder: (_) => const LoginView());

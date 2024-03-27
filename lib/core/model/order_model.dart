@@ -28,6 +28,6 @@ class OrderModel extends Model {
 
   @override
   String get createDate =>
-      Methods.convertTime(Methods.getDateTime(data, FieldName.createDate),
+      Methods.convertTime(Methods.getDateTime(data, FieldName.createDate)??DateTime.now(),
           defaultFormat: 'dd/MM/yyyy - HH:mm');
 }

@@ -6,7 +6,8 @@ import 'package:project_order_food/ui/shared/ui_helpers.dart';
 import 'package:project_order_food/ui/view/common_view/loading_view/data_app.dart';
 
 class LoadingView extends StatefulWidget {
-  const LoadingView({super.key});
+  const LoadingView({super.key, required this.isAdmin});
+  final bool isAdmin;
 
   @override
   State<LoadingView> createState() => _LoadingViewState();
@@ -18,7 +19,7 @@ class _LoadingViewState extends State<LoadingView> {
     super.initState();
 
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => locator<DataApp>().initData());
+        .addPostFrameCallback((_) => locator<DataApp>().initData(widget.isAdmin));
   }
 
   @override

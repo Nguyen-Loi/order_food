@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+
 import 'extension.dart';
 
 extension Find<K, V, R> on Map<K, V> {
@@ -83,13 +84,18 @@ class Methods {
     });
   }
 
-  static DateTime getDateTime(Map data, String fieldName,
+  static DateTime? getDateTime(Map data, String fieldName,
       {DateTime? defaultValue}) {
-    return data.findData(fieldName, (value) {
-      if (value is Timestamp) {
-        return value.toDate();
-      }
-    }, defaultValue: defaultValue ?? DateTime(1, 1, 1, 1, 1));
+    if (data[fieldName] == null) {
+      return null;
+    } else if (data[fieldName] is DateTime) {
+      return data[fieldName];
+    } else if (data[fieldName] is Timestamp) {
+      Timestamp va = data[fieldName];
+      return va.toDate();
+    } else {
+      return null;
+    }
   }
 
   static String convertTime(DateTime dateTime,

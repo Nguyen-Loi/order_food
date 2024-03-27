@@ -29,7 +29,8 @@ class RegisterController {
             FieldName.email: currentUser.email,
           }, customID: currentUser.uid).then((value) {
             if (value == null) {
-              locator<GetNavigation>().replaceTo(RoutePaths.loadingView);
+              locator<GetNavigation>()
+                  .replaceTo(RoutePaths.loadingView, arguments: false);
             } else {
               locator<GetNavigation>().openDialog(content: value);
             }

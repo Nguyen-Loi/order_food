@@ -19,4 +19,5 @@ class FieldName {
   static const String userName = 'userName';
   static const String phoneNumber = 'phoneNumber';
   static const String userID = 'userID';
+  static const String password = 'password';
 }

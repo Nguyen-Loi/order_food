@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_order_food/core/extension/validation.dart';
 import 'package:project_order_food/core/service/get_navigation.dart';
 import 'package:project_order_food/locator.dart';
 import 'package:project_order_food/ui/config/app_style.dart';
@@ -10,7 +11,6 @@ import 'package:project_order_food/ui/view/common_view/login/controllers/login_c
 import 'package:project_order_food/ui/view/common_view/register/register_view.dart';
 import 'package:project_order_food/ui/widget/a_button.dart';
 import 'package:project_order_food/ui/widget/form/a_text_form_field.dart';
-import 'package:project_order_food/core/extension/validation.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -66,6 +66,8 @@ class _LoginViewState extends State<LoginView> {
                     onSaved: (v) => controller.password = v,
                   ),
                   UIHelper.verticalSpaceMedium(),
+                  _optionLogin(),
+                  UIHelper.verticalSpaceMedium(),
                   AButton.text(
                     'Đăng nhập',
                     isExpanded: true,
@@ -99,5 +101,34 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  Widget _optionLogin() {
+    return Column(children: <Widget>[
+      ListTile(
+        title: const Text('Admin'),
+        leading: Radio<bool>(
+          value: true,
+          groupValue: controller.loginWithAdmin,
+          onChanged: (value) {
+            setState(() {
+              controller.loginWithAdmin = value ?? true;
+            });
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text('User'),
+        leading: Radio<bool>(
+          value: false,
+          groupValue: controller.loginWithAdmin,
+          onChanged: (value) {
+            setState(() {
+              controller.loginWithAdmin = value ?? false;
+            });
+          },
+        ),
+      ),
+    ]);
   }
 }
